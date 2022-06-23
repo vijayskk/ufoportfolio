@@ -28,7 +28,7 @@ renderer.setPixelRatio(window.devicePixelRatio)
 
 renderer.setSize(window.innerWidth,window.innerHeight);
 
-camera.position.setZ(300);
+camera.position.setZ(170);
 camera.position.setY(180);
 camera.rotation.set(-0.5,0,0)
 
@@ -54,12 +54,12 @@ const l1 = new PointLight(0xffffff,0)
 l1.position.set(0,180,300) 
 l1.target = world
 
-const l3 = new PointLight(0xffffff,1)
+const l3 = new PointLight(0xffffff,1.1)
 
 l3.position.set(0,400,0) 
 l3.target = world
 
-const l2 = new PointLight(0xffffff,1)
+const l2 = new PointLight(0xffffff,1.1)
 
 l2.position.set(0,2800000,3000000) 
 l2.target = world
@@ -74,7 +74,7 @@ const loader = new GLTFLoader()
 loader.load('/ufo/untitled.gltf',(gltf)=>{
   ufo = gltf
   ufo.scene.position.y += 160
-  ufo.scene.position.z += 60
+  ufo.scene.position.z += 0
   ufo.scene.scale.set(10,10,10)
   scene.add(ufo.scene)
 })
@@ -120,8 +120,7 @@ document.onkeydown = function(e){
 
 
 // -------------------------
-const glitchPass = new GlitchPass();
-composer.addPass( glitchPass );
+
 
 
 
@@ -129,7 +128,6 @@ function animate(){
   window.requestAnimationFrame(animate)
 
   //controls.update()
-  composer.render();
 
   renderer.render(scene,camera)
 }
