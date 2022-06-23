@@ -28,7 +28,7 @@ renderer.setPixelRatio(window.devicePixelRatio)
 renderer.setSize(window.innerWidth,window.innerHeight);
 
 camera.position.setZ(300);
-camera.position.setY(80);
+camera.position.setY(180);
 camera.rotation.set(-0.5,0,0)
 
 
@@ -37,7 +37,7 @@ const loadr = new THREE.TextureLoader()
 const map = loadr.load("nrm.png")
 
 const groundgeo = new THREE.BoxGeometry(50000,1,50000) 
-const groundmat = new THREE.MeshStandardMaterial({color:0x0e134a,normalMap:map})
+const groundmat = new THREE.MeshStandardMaterial({color:0x0e134a})
 
 const ground = new THREE.Mesh(groundgeo,groundmat)
 ground.position.y = -100
@@ -47,9 +47,9 @@ scene.add(ground)
 
 // Lighting
 
-const l1 = new PointLight(0xffffff,1)
+const l1 = new PointLight(0xffffff,2)
 
-l1.position.set(0,80,300) 
+l1.position.set(0,180,300) 
 l1.target = ground
 
 const l1help = new PointLightHelper(l1) 
@@ -60,6 +60,7 @@ var ufo
 const loader = new GLTFLoader()
 loader.load('/ufo/untitled.gltf',(gltf)=>{
   ufo = gltf
+  ufo.scene.position.y += 100
   ufo.scene.scale.set(20,20,20)
   scene.add(ufo.scene)
 })
@@ -68,7 +69,7 @@ loader.load('/ufo/untitled.gltf',(gltf)=>{
 //Controlls
 
 document.onkeydown = function(e){
-  const speed = 70
+  const speed = 20
   console.log(e.keyCode);
   if(e.keyCode === 39){
     ufo.scene.position.x += speed;
@@ -92,19 +93,43 @@ document.onkeydown = function(e){
   }
 
 
-  if(e.keyCode === 65 && ufo.scene.position.y < 1000){
-    ufo.scene.position.y += speed / 2;
-    camera.position.y += speed / 2;
-    l1.position.y += speed / 2;
-  }
-  if(e.keyCode === 90 && ufo.scene.position.y > 0){
-    ufo.scene.position.y -= speed / 2;
-    camera.position.y -= speed / 2;
-    l1.position.y -= speed / 2;
-  }
+ 
 }
 
 const controls = new OrbitControls(camera, renderer.domElement)
+
+
+
+// Elements -----------------
+
+
+// Main name
+var name
+const nameloader = new GLTFLoader()
+nameloader.load('/name/name.gltf',(gltf)=>{
+  name = gltf
+  name.scene.scale.set(80,80,80)
+  name.scene.position.set(-40,-73,-100)
+  name.scene.rotation.set(0,0.2,0)
+  scene.add(name.scene)
+})
+
+// Main image
+var image
+const imageloader = new GLTFLoader()
+imageloader.load('/image/image.gltf',(gltf)=>{
+  image = gltf
+  image.scene.scale.set(100,100,100)
+  image.scene.position.set(0,-100,-600)
+  image.scene.rotation.set(0,-0.2,0)
+  scene.add(image.scene)
+})
+
+
+
+// -------------------------
+
+
 
 
 function animate(){
@@ -115,4 +140,7 @@ function animate(){
   renderer.render(scene,camera)
 }
 animate()
+
+const music = document.getElementById("#music")
+music.play()
 
