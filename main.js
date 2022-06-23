@@ -3,6 +3,8 @@ import './style.css'
 import * as THREE from 'three'
 import { PointLight, PointLightHelper, SpotLight, SpotLightHelper } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js';
 
 
 
@@ -30,37 +32,50 @@ camera.position.setZ(300);
 camera.position.setY(180);
 camera.rotation.set(-0.5,0,0)
 
+const composer = new EffectComposer( renderer );
+
+
 
 // Plane
-const loadr = new THREE.TextureLoader()
-const map = loadr.load("nrm.png")
-
-const groundgeo = new THREE.BoxGeometry(50000,1,50000) 
-const groundmat = new THREE.MeshStandardMaterial({color:0x0e134a})
-
-const ground = new THREE.Mesh(groundgeo,groundmat)
-ground.position.y = -100
-
-scene.add(ground)
+var world
+const worldloader = new GLTFLoader()
+worldloader.load('/world/world.gltf',(gltf)=>{
+  world = gltf
+  world.scene.position.y += 100
+  world.scene.scale.set(80,80,80)
+  scene.add(world.scene)
+})
 
 
 // Lighting
 
-const l1 = new PointLight(0xffffff,2)
+const l1 = new PointLight(0xffffff,0)
 
 l1.position.set(0,180,300) 
-l1.target = ground
+l1.target = world
 
-const l1help = new PointLightHelper(l1) 
+const l3 = new PointLight(0xffffff,1)
 
-scene.add(l1)
+l3.position.set(0,400,0) 
+l3.target = world
+
+const l2 = new PointLight(0xffffff,1)
+
+l2.position.set(0,2800000,3000000) 
+l2.target = world
+
+
+scene.add(l1,l2,l3)
+
+
 // UFO
 var ufo
 const loader = new GLTFLoader()
 loader.load('/ufo/untitled.gltf',(gltf)=>{
   ufo = gltf
-  ufo.scene.position.y += 100
-  ufo.scene.scale.set(20,20,20)
+  ufo.scene.position.y += 160
+  ufo.scene.position.z += 60
+  ufo.scene.scale.set(10,10,10)
   scene.add(ufo.scene)
 })
 
@@ -68,7 +83,7 @@ loader.load('/ufo/untitled.gltf',(gltf)=>{
 //Controlls
 
 document.onkeydown = function(e){
-  const speed = 20
+  const speed = 5
   console.log(e.keyCode);
   if(e.keyCode === 39){
     ufo.scene.position.x += speed;
@@ -101,32 +116,12 @@ document.onkeydown = function(e){
 // Elements -----------------
 
 
-// Main name
-var name
-const nameloader = new GLTFLoader()
-nameloader.load('/name/name.gltf',(gltf)=>{
-  name = gltf
-  name.scene.scale.set(80,80,80)
-  name.scene.position.set(-40,-73,-100)
-  name.scene.rotation.set(0,0.2,0)
-  scene.add(name.scene)
-})
-
-// Main image
-var image
-const imageloader = new GLTFLoader()
-imageloader.load('/image/image.gltf',(gltf)=>{
-  image = gltf
-  image.scene.scale.set(100,100,100)
-  image.scene.position.set(0,-100,-600)
-  image.scene.rotation.set(0,-0.2,0)
-  scene.add(image.scene)
-})
 
 
 
 // -------------------------
-
+const glitchPass = new GlitchPass();
+composer.addPass( glitchPass );
 
 
 
@@ -134,6 +129,7 @@ function animate(){
   window.requestAnimationFrame(animate)
 
   //controls.update()
+  composer.render();
 
   renderer.render(scene,camera)
 }

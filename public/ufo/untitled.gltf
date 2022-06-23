@@ -89,9 +89,9 @@
             "name" : "Wireframe",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.006370175629854202,
-                    0.006370175629854202,
-                    0.006370175629854202,
+                    0.46339502930641174,
+                    0.5277189016342163,
+                    0.4790199398994446,
                     1
                 ],
                 "metallicFactor" : 0,
@@ -103,9 +103,9 @@
             "name" : "Body",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0,
-                    0,
-                    0,
+                    0.2610684633255005,
+                    0.3843747079372406,
+                    0.08639749139547348,
                     1
                 ],
                 "metallicFactor" : 0
