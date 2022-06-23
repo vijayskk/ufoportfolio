@@ -49,9 +49,9 @@ worldloader.load('/world/world.gltf',(gltf)=>{
 
 // Lighting
 
-const l1 = new PointLight(0xffffff,0)
+const l1 = new PointLight(0xffffff,1)
 
-l1.position.set(0,180,300) 
+l1.position.set(0,180,1000) 
 l1.target = world
 
 const l3 = new PointLight(0xffffff,1.1)

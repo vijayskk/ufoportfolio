@@ -1560,12 +1560,9 @@
             "doubleSided" : true,
             "name" : "Image",
             "pbrMetallicRoughness" : {
-                "baseColorFactor" : [
-                    0,
-                    0,
-                    0,
-                    1
-                ],
+                "baseColorTexture" : {
+                    "index" : 0
+                },
                 "metallicFactor" : 0,
                 "roughnessFactor" : 0.5
             }
@@ -3193,6 +3190,19 @@
                     "material" : 34
                 }
             ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/jpeg",
+            "name" : "pp",
+            "uri" : "pp.jpg"
         }
     ],
     "accessors" : [
@@ -7520,6 +7530,12 @@
             "buffer" : 0,
             "byteLength" : 15072,
             "byteOffset" : 8311088
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
         }
     ],
     "buffers" : [
