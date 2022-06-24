@@ -83,7 +83,7 @@ loader.load('/ufo/untitled.gltf',(gltf)=>{
 //Controlls
 
 document.onkeydown = function(e){
-  const speed = 5
+  const speed = 10
   console.log(e.keyCode);
   if(e.keyCode === 39){
     ufo.scene.position.x += speed;
