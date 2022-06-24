@@ -86,24 +86,24 @@ document.onkeydown = function(e){
   const speed = 10
   console.log(e.keyCode);
   if(e.keyCode === 39){
-    ufo.scene.position.x += speed;
-    camera.position.x += speed;
-    l1.position.x += speed;
+    ufo.scene.velocity.x += speed;
+    camera.velocity.x += speed;
+    l1.velocity.x += speed;
   }
   if(e.keyCode === 37){
-    ufo.scene.position.x -= speed;
-    camera.position.x-= speed;
-    l1.position.x-= speed;
+    ufo.scene.velocity.x -= speed;
+    camera.velocity.x-= speed;
+    l1.velocity.x-= speed;
   }
   if(e.keyCode === 40){
-    ufo.scene.position.z += speed;
-    camera.position.z += speed;
-    l1.position.z += speed;
+    ufo.scene.velocity.z += speed;
+    camera.velocity.z += speed;
+    l1.velocity.z += speed;
   }
   if(e.keyCode === 38){
-    ufo.scene.position.z -= speed;
-    camera.position.z -= speed;
-    l1.position.z -= speed;
+    ufo.scene.velocity.z -= speed;
+    camera.velocity.z -= speed;
+    l1.velocity.z -= speed;
   }
   renderer.render(scene,camera)
 
