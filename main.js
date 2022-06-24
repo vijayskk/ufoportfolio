@@ -105,7 +105,7 @@ document.onkeydown = function(e){
     camera.position.z -= speed;
     l1.position.z -= speed;
   }
-
+  renderer.render(scene,camera)
 
  
 }
