@@ -64,8 +64,13 @@ const l2 = new PointLight(0xffffff,1.1)
 l2.position.set(0,2800000,3000000) 
 l2.target = world
 
+const l4 = new PointLight(0xffffff,1.1)
 
-scene.add(l1,l2,l3)
+l4.position.set(0,100,100) 
+l4.target = world
+
+
+scene.add(l1,l2,l3,l4)
 
 
 // UFO
