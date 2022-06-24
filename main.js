@@ -66,7 +66,7 @@ l2.target = world
 
 const l4 = new PointLight(0xffffff,1.1)
 
-l4.position.set(0,100,100) 
+l4.position.set(0,200,180) 
 l4.target = world
 
 
