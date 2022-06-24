@@ -81,33 +81,42 @@ loader.load('/ufo/untitled.gltf',(gltf)=>{
 
 
 //Controlls
+var isForward = false
+var isBackward = false
+var isLeft = false
+var isRight = false
 
+const speed = 5
 document.onkeydown = function(e){
-  const speed = 10
   console.log(e.keyCode);
   if(e.keyCode === 39){
-    ufo.scene.velocity.x += speed;
-    camera.velocity.x += speed;
-    l1.velocity.x += speed;
+    isForward = true
   }
   if(e.keyCode === 37){
-    ufo.scene.velocity.x -= speed;
-    camera.velocity.x-= speed;
-    l1.velocity.x-= speed;
+    isBackward = true
   }
   if(e.keyCode === 40){
-    ufo.scene.velocity.z += speed;
-    camera.velocity.z += speed;
-    l1.velocity.z += speed;
+    isRight = true
   }
   if(e.keyCode === 38){
-    ufo.scene.velocity.z -= speed;
-    camera.velocity.z -= speed;
-    l1.velocity.z -= speed;
+    isLeft = true
   }
-  renderer.render(scene,camera)
+}
 
- 
+document.onkeyup = function(e){
+  console.log(e.keyCode);
+  if(e.keyCode === 39){
+    isForward = false
+  }
+  if(e.keyCode === 37){
+    isBackward = false
+  }
+  if(e.keyCode === 40){
+    isRight = false
+  }
+  if(e.keyCode === 38){
+    isLeft = false
+  }
 }
 
 
@@ -128,6 +137,26 @@ function animate(){
   window.requestAnimationFrame(animate)
 
   //controls.update()
+  if(isForward){
+    ufo.scene.position.x += speed;
+    camera.position.x += speed;
+    l1.position.x += speed;
+  }
+  if(isBackward){
+    ufo.scene.position.x -= speed;
+    camera.position.x-= speed;
+    l1.position.x-= speed;
+  }
+  if(isRight){
+    ufo.scene.position.z += speed;
+    camera.position.z += speed;
+    l1.position.z += speed;
+  }
+  if(isLeft){
+    ufo.scene.position.z -= speed;
+    camera.position.z -= speed;
+    l1.position.z -= speed;
+  }
 
   renderer.render(scene,camera)
 }
